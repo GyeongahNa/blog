@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 function List() {
   return (
     <>
       <div>
-        <button>글쓰기</button>
+       <Link to={`/article/write`}><button >글쓰기</button></Link>
       </div>
       <div>
         <ul>

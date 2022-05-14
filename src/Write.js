@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from 'axios';
 
 function Write() {
     const [title, setTitle] = useState('');
@@ -7,10 +8,17 @@ function Write() {
 
     function onChangeTitle(e) {
         setTitle(e.target.value);
+        console.log(e.target.value);
     }
 
     function onChangeDetail(e) {
         setDetail(e.target.value);
+        console.log(e.target.value);
+    }
+
+    const onSubmit = async () => {
+        const response = await axios.post('https://localhost:5000/article', [title, detail]);
+        console.log(response);
     }
 
     return (
@@ -24,7 +32,7 @@ function Write() {
             <input onChange={onChangeDetail} type="text" id="detail" value={detail}/>
         </div>
         <div>
-            <button>완료</button>
+            <button onClick={onSubmit}>완료</button>
         </div>
         </>
     );

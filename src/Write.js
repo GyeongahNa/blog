@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Write() {
     const [title, setTitle] = useState('');
     const [detail, setDetail] = useState('');
 
+    const navigate = useNavigate(); 
 
     function onChangeTitle(e) {
         setTitle(e.target.value);
@@ -17,8 +19,16 @@ function Write() {
     }
 
     const onSubmit = async () => {
-        const response = await axios.post('https://localhost:5000/article', [title, detail]);
-        console.log(response);
+        try {
+            const response = await axios.post('http://localhost:5000/article', {title, detail});
+            // console.log(response);
+            // console.log(parseInt(response.status/100));
+            if (response.status == 201) {
+                navigate("/article");
+            }
+        } catch (e) {
+            console.error("안된다")
+        }
     }
 
     return (
